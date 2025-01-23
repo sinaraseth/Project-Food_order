@@ -96,7 +96,7 @@
 
                     ?>
 
-                    <h1>₹<?php echo $total_revenue; ?></h1>
+                    <h1>$<?php echo $total_revenue; ?></h1>
                     <br />
                     Revenue Generated
                 </div>

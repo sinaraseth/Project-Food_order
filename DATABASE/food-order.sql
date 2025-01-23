@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Nov 14, 2022 at 06:51 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.0.19
+-- Host: 127.0.0.1:3306
+-- Generation Time: Mar 04, 2024 at 03:42 PM
+-- Server version: 8.2.0
+-- PHP Version: 8.2.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -27,21 +27,21 @@ SET time_zone = "+00:00";
 -- Table structure for table `tbl_admin`
 --
 
-CREATE TABLE `tbl_admin` (
-  `id` int(10) UNSIGNED NOT NULL,
+DROP TABLE IF EXISTS `tbl_admin`;
+CREATE TABLE IF NOT EXISTS `tbl_admin` (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
   `full_name` varchar(100) NOT NULL,
   `username` varchar(100) NOT NULL,
-  `password` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `password` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `tbl_admin`
 --
 
 INSERT INTO `tbl_admin` (`id`, `full_name`, `username`, `password`) VALUES
-(12, 'Administrator', 'admin', '21232f297a57a5a743894a0e4a801fc3'),
-(13, 'Jaison E Mathew', 'jaison', '5f4dcc3b5aa765d61d8327deb882cf99'),
-(14, 'Varghese Babu', 'password', '5f4dcc3b5aa765d61d8327deb882cf99');
+(12, 'Administrator', 'admin', '21232f297a57a5a743894a0e4a801fc3');
 
 -- --------------------------------------------------------
 
@@ -49,25 +49,42 @@ INSERT INTO `tbl_admin` (`id`, `full_name`, `username`, `password`) VALUES
 -- Table structure for table `tbl_category`
 --
 
-CREATE TABLE `tbl_category` (
-  `id` int(10) UNSIGNED NOT NULL,
+DROP TABLE IF EXISTS `tbl_category`;
+CREATE TABLE IF NOT EXISTS `tbl_category` (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
   `title` varchar(100) NOT NULL,
   `image_name` varchar(255) NOT NULL,
   `featured` varchar(10) NOT NULL,
-  `active` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `active` varchar(10) NOT NULL,
+  `Description` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `tbl_category`
 --
 
-INSERT INTO `tbl_category` (`id`, `title`, `image_name`, `featured`, `active`) VALUES
-(4, 'Pizza', 'Food_Category_790.jpg', 'No', 'Yes'),
-(5, 'Burger', 'Food_Category_344.jpg', 'No', 'Yes'),
-(9, 'Biriyani', 'Food_Category_385.jpg', 'No', 'Yes'),
-(10, 'Chinese', 'Food_Category_697.jpg', 'Yes', 'Yes'),
-(11, 'Arabic', 'Food_Category_447.jpg', 'Yes', 'Yes'),
-(12, 'Indian', 'Food_Category_333.jpg', 'Yes', 'Yes');
+INSERT INTO `tbl_category` (`id`, `title`, `image_name`, `featured`, `active`, `Description`) VALUES
+(13, 'AUPP Restaurant', 'Food_Category_589.jpg', 'Yes', 'Yes', 'Journey to the heart of Cambodia with AUPP Restaurant! Their authentic dishes showcase the culinary traditions of the region, featuring fresh vegetables, fragrant herbs, and the subtle sweetness of coconut milk. From savory fish amok to vibrant mango sala'),
+(14, 'RUPP Restaurant', 'Food_Category_73.jpg', 'Yes', 'Yes', 'Indulge in the culinary artistry of RUPP Restaurant! Their skilled chefs meticulously prepare each dish, using traditional techniques passed down through generations. Experience the perfect balance of sweet, salty, sour, and spicy flavors in every bite'),
+(15, 'ITC Restaurant', 'Food_Category_852.jpg', 'Yes', 'Yes', 'Looking for a taste of adventure? ITC Restaurant delivers! Their diverse menu features dishes from all corners of Cambodia, showcasing the regional variations and culinary influences. Explore the unique flavors of Kampot pepper crab from the coast'),
+(16, 'PRG Restaurant', 'Food_Category_379.jpg', 'Yes', 'Yes', 'Fuel your day with the nourishing power of authentic Khmer cuisine! PRG Restaurant uses fresh, healthy ingredients in their dishes, ensuring a delicious and satisfying meal. Savor the vibrant flavors of stir-fried vegetables with tofu'),
+(17, 'NUM Restaurant', 'Food_Category_664.jpg', 'Yes', 'Yes', 'Share the joy of a communal meal with NUM Restaurant! Their generous portions are perfect for sharing with friends and family. Explore the variety of their rice dishes, served alongside an assortment of flavorful curries, vegetables, and stir-fries'),
+(18, 'RULE Restaurant', 'Food_Category_586.jpg', 'Yes', 'Yes', 'Craving an explosion of authentic Khmer flavors? Look no further than RULE Restaurant!\r\nTheir dishes are prepared with the utmost care, using only the freshest ingredients sourced locally whenever possible. Every bite bursts with the vibrant spices ');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_feedback`
+--
+
+DROP TABLE IF EXISTS `tbl_feedback`;
+CREATE TABLE IF NOT EXISTS `tbl_feedback` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `TextFeedback` varchar(255) NOT NULL,
+  `is_deleted` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -75,48 +92,36 @@ INSERT INTO `tbl_category` (`id`, `title`, `image_name`, `featured`, `active`) V
 -- Table structure for table `tbl_food`
 --
 
-CREATE TABLE `tbl_food` (
-  `id` int(10) UNSIGNED NOT NULL,
+DROP TABLE IF EXISTS `tbl_food`;
+CREATE TABLE IF NOT EXISTS `tbl_food` (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
   `title` varchar(100) NOT NULL,
   `description` text NOT NULL,
   `price` decimal(10,2) NOT NULL,
   `image_name` varchar(255) NOT NULL,
-  `category_id` int(10) UNSIGNED NOT NULL,
+  `category_id` int UNSIGNED NOT NULL,
   `featured` varchar(10) NOT NULL,
-  `active` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `active` varchar(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `tbl_food`
 --
 
 INSERT INTO `tbl_food` (`id`, `title`, `description`, `price`, `image_name`, `category_id`, `featured`, `active`) VALUES
-(4, 'Best Burger', 'Burger with Ham and lots of Cheese,onion and sauce', '250.00', 'Food-Name-6340.jpg', 5, 'No', 'Yes'),
-(5, 'Smoky BBQ Pizza', 'Best Firewood Pizza in Town made with thin cheese', '525.00', 'Food-Name-8298.jpg', 4, 'No', 'Yes'),
-(10, 'Chicken Biriyani', 'Richly flavored aromatic rice layered with marinated chicken ', '120.00', 'Food-Name-6512.jpg', 9, 'Yes', 'Yes'),
-(11, 'Hyderabadi Veg Biryani', 'Mixed vegetables inside layers of fluffy basmati rice', '110.00', 'Food-Name-306.jpg', 9, 'No', 'Yes'),
-(12, 'Thalaserry Beef Biryani', 'Unlike other biryani dishes thalassery biryani is unique', '170.00', 'Food-Name-7044.jpg', 9, 'No', 'Yes'),
-(13, 'Mutton Biriyani', 'Succulent pieces of mutton slow cooked on bed of aromatic rice', '300.00', 'Food-Name-114.jpg', 9, 'No', 'Yes'),
-(15, 'Mediterranean Pizza', 'Pizza sauce, mozzarella, pesto and fresh mozzarella.', '325.00', 'Food-Name-1876.jpg', 4, 'No', 'Yes'),
-(16, 'Classic Paneer Pizza', 'Multigrain base, yumm paneer tikka with thin crust', '308.00', 'Food-Name-5931.jpg', 4, 'No', 'Yes'),
-(17, 'Pepper Al Faham', 'Al Faham is basically the Arabian barbecued chicken usually grilled', '230.00', 'Food-Name-4667.jpg', 11, 'Yes', 'Yes'),
-(18, 'Schezwan Chicken Fried Rice', 'Wholesome stir-fried rice topped with juicy chicken chunks ', '225.00', 'Food-Name-5970.jpg', 10, 'Yes', 'Yes'),
-(19, 'Butter Chicken', 'Perfectly cooked tendered pieces of chicken with a rich tomato and onion ', '255.00', 'Food-Name-5958.jpg', 12, 'Yes', 'Yes'),
-(20, 'Chilly Chicken', 'Chicken marinated with herbs with batter and gravy made with Chinese sauces', '235.00', 'Food-Name-2105.jpg', 10, 'Yes', 'Yes'),
-(21, ' Kanthari Al Faham', 'Kanthari alfaham chicken is one of the most spicy version of chicken Alfaham ', '245.00', 'Food-Name-7380.jpg', 11, 'No', 'Yes'),
-(22, 'Desi Spice Khichdi Box', 'Special Chef-curated Khichdi bowls that will take you on Great Indian spice tour', '229.00', 'Food-Name-1329.jpg', 12, 'No', 'Yes'),
-(23, 'Peri Peri Alfaham Mandhi', 'Spicy peri peri alfaham alongs with kuzhimandhi with salad mayonise', '240.00', 'Food-Name-9164.jpg', 11, 'No', 'Yes'),
-(24, 'Kuzhi Mandhi', 'A flavor-packed combo with mandi chicken , mandi rice and dips ', '199.00', 'Food-Name-6628.jpg', 11, 'Yes', 'Yes'),
-(25, 'Rumali Chicken Shawarma', 'Chicken shawarma wrap with romali rotti contanis chicken meat mayonise', '150.00', 'Food-Name-7422.jpg', 11, 'No', 'Yes'),
-(26, 'Chicken Tikka Masala', 'Chicken tikka masala served as a portion goes best with rice,breads.\r\n\r\n', '280.00', 'Food-Name-3204.jpg', 12, 'No', 'Yes'),
-(27, 'Kadai Paneer', 'Delicious Indian delicacy made of paneer, thick gravy of cream', '157.00', 'Food-Name-2376.jpg', 12, 'No', 'Yes'),
-(28, 'Chicken Fried Rice', 'A deliciously hearty combo of wholesome chicken fried rice.', '215.00', 'Food-Name-9721.jpg', 12, 'No', 'Yes'),
-(29, 'Chicken Noodles', 'Chicken noodles served for one person from hygeinic kitchen of 12 to 12.', '215.00', 'Food-Name-1771.jpg', 10, 'No', 'Yes'),
-(30, 'Chilli Gobi', 'A deliciously aromatic dish with deep-fried cauliflower', '122.00', 'Food-Name-6250.jpg', 10, 'No', 'Yes'),
-(31, 'McChicken Burger', 'Tender and juicy chicken patty cooked to perfection with mayonnaise', '131.00', 'Food-Name-7625.jpg', 5, 'No', 'Yes'),
-(32, 'Tandoori Zinger Burger', 'Chicken zinger with a delicious tandoori sauce', '199.00', 'Food-Name-3025.jpg', 5, 'No', 'Yes'),
-(33, 'Cheese Shawarma Burger', 'kahif special big chicken cheese made with a cheesy twist', '333.00', 'Food-Name-391.jpg', 5, 'No', 'Yes'),
-(34, 'Kizhi Porotta ', '3 porotta is mixed with beef curry and served ', '199.00', 'Food-Name-4088.jpg', 12, 'No', 'Yes');
+(37, 'Chicken Curry', 'Indulge in the rich flavors of our Chicken Curry – a taste of tradition, a journey of spices', 2.00, 'Food-Name-3830.jpg', 13, 'Yes', 'Yes'),
+(38, 'Kuy Teav', 'Delicious simplicity in every bowl: Kuy Teav, Cambodian comfort food at its best', 2.50, 'Food-Name-8880.jpg', 14, 'Yes', 'Yes'),
+(39, 'Lok Lak', 'Lok Lak - a perfect blend of tender beef, fresh veggies, and zesty flavors', 2.00, 'Food-Name-1856.jpg', 14, 'Yes', 'Yes'),
+(40, 'Fry Fish', 'Our Fry Fish delights with every bite – a taste of the sea brought to your plate', 3.00, 'Food-Name-1128.jpg', 15, 'Yes', 'Yes'),
+(41, 'Amok', 'Amok: Cambodian delicacy of fish or chicken in fragrant coconut curry, served with rice', 2.00, 'Food-Name-8723.jpg', 15, 'Yes', 'Yes'),
+(42, 'Lort Cha', 'Cambodian stir-fry featuring fresh noodles, savory meats, and crisp vegetables, seasoned to perfection for a flavorful experience.', 2.00, 'Food-Name-6250.jpg', 16, 'Yes', 'Yes'),
+(43, 'Coffee Latte', 'Caffe lattes are enjoyed worldwide and are known for their balanced flavor profile', 1.50, 'Food-Name-8457.jpg', 13, 'Yes', 'Yes'),
+(44, 'LEMONGRASS CHICKEN STIR-FRY ', 'Chicken Stir-Fry - Where Flavor Meets Freshness', 4.00, 'Food-Name-2775.jpg', 16, 'Yes', 'Yes'),
+(45, 'Fries Rice', 'Fry Rice: Taste the Crunchy Perfection!', 2.00, 'Food-Name-4470.jpg', 17, 'Yes', 'Yes'),
+(46, 'Fried Noodle', 'Dive into our Crispy Fry Noodles!', 1.50, 'Food-Name-8695.jpg', 17, 'Yes', 'Yes'),
+(47, 'Meat Ball', 'Indulge in Juicy Meatball Goodness!', 2.00, 'Food-Name-8729.jpg', 18, 'Yes', 'Yes'),
+(48, 'Hot Dog', 'Hot Dogs: Sizzle into Satisfaction!', 1.50, 'Food-Name-5689.jpg', 18, 'Yes', 'Yes');
 
 -- --------------------------------------------------------
 
@@ -124,28 +129,28 @@ INSERT INTO `tbl_food` (`id`, `title`, `description`, `price`, `image_name`, `ca
 -- Table structure for table `tbl_order`
 --
 
-CREATE TABLE `tbl_order` (
-  `id` int(10) UNSIGNED NOT NULL,
+DROP TABLE IF EXISTS `tbl_order`;
+CREATE TABLE IF NOT EXISTS `tbl_order` (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
   `food` varchar(150) NOT NULL,
   `price` decimal(10,2) NOT NULL,
-  `qty` int(11) NOT NULL,
+  `qty` int NOT NULL,
   `total` decimal(10,2) NOT NULL,
   `order_date` datetime NOT NULL,
   `status` varchar(50) NOT NULL,
-  `u_id` int(25) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `u_id` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `tbl_order`
 --
 
 INSERT INTO `tbl_order` (`id`, `food`, `price`, `qty`, `total`, `order_date`, `status`, `u_id`) VALUES
-(13, 'Biriyani', '200.00', 1, '200.00', '2022-11-12 12:50:24', 'Delivered', 6),
-(14, 'Best Burger', '250.00', 1, '250.00', '2022-11-12 12:56:39', 'Delivered', 6),
-(15, 'Best Burger', '250.00', 1, '250.00', '2022-11-12 02:20:43', 'Delivered', 7),
-(16, 'Smoky BBQ Pizza', '525.00', 1, '525.00', '2022-11-12 02:20:53', 'Delivered', 7),
-(17, 'Thalaserry Beef Biryani', '170.00', 1, '170.00', '2022-11-13 07:44:42', 'Ordered', 6),
-(18, 'Peri Peri Alfaham Mandhi', '240.00', 1, '240.00', '2022-11-13 01:54:44', 'Delivered', 6);
+(20, 'Kuy Teav', 2.50, 2, 5.00, '2024-03-03 06:04:33', 'Delivered', 25),
+(21, 'Chicken Curry', 2.00, 2, 4.00, '2024-03-04 02:08:45', 'Delivered', 26),
+(22, 'Chicken Curry', 2.00, 1, 2.00, '2024-03-04 02:38:46', 'Delivered', 25),
+(23, 'Chicken Curry', 2.00, 1, 2.00, '2024-03-04 03:09:39', 'Ordered', 25);
 
 -- --------------------------------------------------------
 
@@ -153,95 +158,28 @@ INSERT INTO `tbl_order` (`id`, `food`, `price`, `qty`, `total`, `order_date`, `s
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `username` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
   `customer_name` varchar(150) NOT NULL,
   `customer_email` varchar(150) NOT NULL,
-  `customer_contact` bigint(25) NOT NULL,
+  `customer_contact` bigint NOT NULL,
   `customer_address` varchar(255) NOT NULL,
-  `created_at` datetime DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `customer_name`, `customer_email`, `customer_contact`, `customer_address`, `created_at`) VALUES
-(6, 'jaison_e_mathew', '$2y$10$d//Ey6eukf3xhnFlHUhrwet/xaTQEmhmjyvEF.MTT1a5NgBbMbhke', 'Jaison E Mathew', 'jaisone.bca2023@saintgits.org', 9526519828, 'Enchakattil Chengannur', '2022-11-12 17:20:06'),
-(7, 'febin_binoy', '$2y$10$3.3PY8VemjmGEiYcynAB7uoRrBeAok/Sw3rv2Zo1/.P0bNi66gNbe', 'Febin Binoy', 'febin.bca2023@saintgits.org', 9038394034, 'Febin Villa Chenganassery', '2022-11-12 18:48:54'),
-(8, 'varghese_babu', '$2y$10$eF5TxEyY1AS/xuJMurhvferx76E1fRe3ABxzBZQMZtJf4p3J32RRO', 'Varghese Babu', 'varghesebabu@gmail.com', 9284049384, 'Varghese Villa Chengannur', '2022-11-12 19:06:00'),
-(12, 'jaison_thomas', '$2y$10$emiUy3AQRP6FMXlEb3lY4urt8jwjzHM.FZK2WZShJDLUpquCqKnAW', 'Jaison Thomas', 'jaisonthomas@gmail.com', 9319392053, 'Jaison Villa ,chengannur', '2022-11-14 21:06:09');
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `tbl_admin`
---
-ALTER TABLE `tbl_admin`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `tbl_category`
---
-ALTER TABLE `tbl_category`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `tbl_food`
---
-ALTER TABLE `tbl_food`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `tbl_order`
---
-ALTER TABLE `tbl_order`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `username` (`username`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `tbl_admin`
---
-ALTER TABLE `tbl_admin`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
---
--- AUTO_INCREMENT for table `tbl_category`
---
-ALTER TABLE `tbl_category`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
---
--- AUTO_INCREMENT for table `tbl_food`
---
-ALTER TABLE `tbl_food`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
-
---
--- AUTO_INCREMENT for table `tbl_order`
---
-ALTER TABLE `tbl_order`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
-
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+(25, 'costomerA', '$2y$10$f9qaksSQlrKv.Yp7S4JjAem3tqC4VPFtf12rPWuIvvJVebDC7TNhi', 'costomerA', 'ibciasbbc@gmail.com', 230924, 'Phnom Penh\r\nPhnom Penh', '2024-03-04 01:00:27'),
+(26, 'sinaraseth', '$2y$10$lJy.keAz3whLhDRwKqu6huZ2po8CpvvNbKxZj1xlyoXuvZdwal.vi', 'Sinara Seth', 'sinaraseth@gmail.com', 9775510588, 'PreakLeap, Chroy Changva', '2024-03-04 09:07:53'),
+(27, 'yuthkota', '$2y$10$q0M839IjxT4wxSkYqWYoeOgtbKalQbba1o9rPjoPFVvgXh5KcXsWO', 'Pa Kotthrayothe', 'kotthrayothe.pa@student.cadt.edu.kh', 87850077, 'Phnom Penh\r\nPhnom Penh', '2024-03-04 22:12:48');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

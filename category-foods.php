@@ -1,124 +1,104 @@
+<?php
+include('partials-front/menu.php');
+
+// Check whether category_id is set in the URL
+if (isset($_GET['category_id'])) {
+  // Category id is set, get the id
+  $category_id = $_GET['category_id'];
+
+  // Get the category title based on category ID
+  $sql_category = "SELECT title FROM tbl_category WHERE id=$category_id";
+
+  // Execute the query
+  $res_category = mysqli_query($conn, $sql_category);
+
+  // Fetch the category title from the result
+  $row_category = mysqli_fetch_assoc($res_category);
+
+  // Get the title
+  $category_title = $row_category['title'];
+} else {
+  // If category_id is not set in the URL, redirect to the home page
+  header('location:' . SITEURL);
+}
+
+// Retrieve category description
+$sql_description = "SELECT description FROM tbl_category WHERE id=$category_id";
+$res_description = mysqli_query($conn, $sql_description);
+$row_description = mysqli_fetch_assoc($res_description);
+$category_description = isset($row_description['description']) ? $row_description['description'] : '';
+
+?>
+
+<section class="food-search-category text-center">
+  <div class="container-video">
     
-    <?php include('partials-front/menu.php'); ?>
+    <video class="food-search-video" autoplay muted loop>
+      <source src="/food-order/images/video/last.mp4" type="video/mp4">
+      <p>Your browser does not support the video tag.</p>
+    </video>
+  </div>
+</section>
+<div class="container">
+<h2>Foods on <a href="#" class="text-darkblue">"<?php echo $category_title; ?>"</a></h2>
+</div>
 
-    <?php 
-        //CHeck whether id is passed or not
-        if(isset($_GET['category_id']))
-        {
-            //Category id is set and get the id
-            $category_id = $_GET['category_id'];
-            // Get the CAtegory Title Based on Category ID
-            $sql = "SELECT title FROM tbl_category WHERE id=$category_id";
+<section class="category-description">
+  <div class="container">
+    <h2>Restaurant Description</h2>
+    <h3><?php echo $category_description; ?></h3>
+  </div>
+</section>
 
-            //Execute the Query
-            $res = mysqli_query($conn, $sql);
+<section class="food-menu">
+  <div class="container">
+    <h2 class="text-center">Food Menu</h2>
 
-            //Get the value from Database
-            $row = mysqli_fetch_assoc($res);
-            //Get the TItle
-            $category_title = $row['title'];
-        }
-        else
-        {
-            //CAtegory not passed
-            //Redirect to Home page
-            header('location:'.SITEURL);
-        }
+    <?php
+    // Create SQL query to get foods based on selected category
+    $sql_foods = "SELECT * FROM tbl_food WHERE category_id=$category_id";
+
+    // Execute the query
+    $res_foods = mysqli_query($conn, $sql_foods);
+
+    // Check whether there are foods available
+    if (mysqli_num_rows($res_foods) > 0) {
+      // Foods available, fetch and display them
+      while ($row_food = mysqli_fetch_assoc($res_foods)) {
+        $food_id = $row_food['id'];
+        $food_title = $row_food['title'];
+        $food_price = $row_food['price'];
+        $food_description = $row_food['description'];
+        $food_image = $row_food['image_name'];
+        ?>
+
+        <div class="food-menu-box">
+          <div class="food-menu-img">
+            <?php if (!empty($food_image)) { ?>
+              <img src="<?php echo SITEURL; ?>images/food/<?php echo $food_image; ?>" alt="<?php echo $food_title; ?>" class="img-responsive img-curve">
+            <?php } else { ?>
+              <div class="error">Image not Available.</div>
+            <?php } ?>
+          </div>
+          <div class="food-menu-desc">
+            <h4><?php echo $food_title; ?></h4>
+            <p class="food-price">$<?php echo $food_price; ?></p>
+            <p class="food-detail"><?php echo $food_description; ?></p>
+            <br>
+            <a href="<?php echo SITEURL; ?>order.php?food_id=<?php echo $food_id; ?>" class="btn btn-primary">Order Now</a>
+          </div>
+        </div>
+
+      <?php
+      }
+    } else {
+      // No foods available for this category
+      echo "<div class='error'>No Foods Available.</div>";
+    }
     ?>
 
+    <div class="clearfix"></div>
+  </div>
+</section>
 
-    <!-- fOOD sEARCH Section Starts Here -->
-    <section class="food-search text-center">
-        <div class="container">
-            
-            <h2>Foods on <a href="#" class="text-white">"<?php echo $category_title; ?>"</a></h2>
-
-        </div>
-    </section>
-    <!-- fOOD sEARCH Section Ends Here -->
-
-
-
-    <!-- fOOD MEnu Section Starts Here -->
-    <section class="food-menu">
-        <div class="container">
-            <h2 class="text-center">Food Menu</h2>
-
-            <?php 
-            
-                //Create SQL Query to Get foods based on Selected CAtegory
-                $sql2 = "SELECT * FROM tbl_food WHERE category_id=$category_id";
-
-                //Execute the Query
-                $res2 = mysqli_query($conn, $sql2);
-
-                //Count the Rows
-                $count2 = mysqli_num_rows($res2);
-
-                //CHeck whether food is available or not
-                if($count2>0)
-                {
-                    //Food is Available
-                    while($row2=mysqli_fetch_assoc($res2))
-                    {
-                        $id = $row2['id'];
-                        $title = $row2['title'];
-                        $price = $row2['price'];
-                        $description = $row2['description'];
-                        $image_name = $row2['image_name'];
-                        ?>
-                        
-                        <div class="food-menu-box">
-                            <div class="food-menu-img">
-                                <?php 
-                                    if($image_name=="")
-                                    {
-                                        //Image not Available
-                                        echo "<div class='error'>Image not Available.</div>";
-                                    }
-                                    else
-                                    {
-                                        //Image Available
-                                        ?>
-                                        <img src="<?php echo SITEURL; ?>images/food/<?php echo $image_name; ?>" alt="Chicke Hawain Pizza" class="img-responsive img-curve">
-                                        <?php
-                                    }
-                                ?>
-                                
-                            </div>
-
-                            <div class="food-menu-desc">
-                                <h4><?php echo $title; ?></h4>
-                                <p class="food-price">₹<?php echo $price; ?></p>
-                                <p class="food-detail">
-                                    <?php echo $description; ?>
-                                </p>
-                                <br>
-
-                                <a href="<?php echo SITEURL; ?>order.php?food_id=<?php echo $id; ?>" class="btn btn-primary">Order Now</a>
-                            </div>
-                        </div>
-
-                        <?php
-                    }
-                }
-                else
-                {
-                    //Food not available
-                    echo "<div class='error'>Food not Available.</div>";
-                }
-            
-            ?>
-
-            
-
-            <div class="clearfix"></div>
-
-            
-
-        </div>
-
-    </section>
-    <!-- fOOD Menu Section Ends Here -->
-
-    <?php include('partials-front/footer.php'); ?>
+<?php include('partials-front/footer.php'); ?>

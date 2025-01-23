@@ -111,7 +111,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <div class="container">
             <div class="logo">
                 <a href="http://localhost/food-order/" title="Logo">
-                    <img src="images/logo.png" alt="Restaurant Logo" class="img-responsive">
+                    <img src="images/logonew.jpg" alt="Restaurant Logo" class="img-responsive">
                 </a>
             </div>
 <br>

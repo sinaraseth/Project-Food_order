@@ -1,4 +1,5 @@
 <?php 
+    //define('SITEURL', 'http://localhost/food-order/'); 
 
     //AUthorization - Access COntrol
     //CHeck whether the user is logged in or not

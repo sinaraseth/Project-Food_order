@@ -46,7 +46,7 @@
 
                 <table class="content-table" >
                     <tr>
-                        <th>S.N.</th>
+                        <th>ID</th>
                         <th>Title</th>
                         <th>Price</th>
                         <th>Image</th>
@@ -87,7 +87,7 @@
                                 <tr>
                                     <td><?php echo $sn++; ?>. </td>
                                     <td><?php echo $title; ?></td>
-                                    <td>₹<?php echo $price; ?></td>
+                                    <td>$<?php echo $price; ?></td>
                                     <td>
                                         <?php  
                                             //CHeck whether we have image or not

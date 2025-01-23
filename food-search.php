@@ -31,7 +31,7 @@
                 //SQL Query to Get foods based on search keyword
                 //$search = burger '; DROP database name;
                 // "SELECT * FROM tbl_food WHERE title LIKE '%burger'%' OR description LIKE '%burger%'";
-                $sql = "SELECT * FROM tbl_food WHERE title LIKE '%$search%' OR description LIKE '%$search%'";
+                $sql = "SELECT * FROM tbl_food WHERE title LIKE '%$search%'";
 
                 //Execute the Query
                 $res = mysqli_query($conn, $sql);
@@ -76,7 +76,7 @@
 
                             <div class="food-menu-desc">
                                 <h4><?php echo $title; ?></h4>
-                                <p class="food-price">₹<?php echo $price; ?></p>
+                                <p class="food-price">$<?php echo $price; ?></p>
                                 <p class="food-detail">
                                     <?php echo $description; ?>
                                 </p>

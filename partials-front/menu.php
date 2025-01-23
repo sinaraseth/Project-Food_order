@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <!-- Important to make website responsive -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Foodhub</title>
+    <title>CADT RW -Home page</title>
 
     <!-- Link our CSS file -->
     <link rel="stylesheet" href="css/style.css">
@@ -18,7 +18,7 @@
         <div class="container">
             <div class="logo">
                 <a href="http://localhost/food-order/" title="Logo">
-                    <img src="images/logo.png" alt="Restaurant Logo" class="img-responsive">
+                    <img src="images/CADT-RES.jpg" alt="Restaurant Logo" class="logo-img">
                 </a>
             </div>
 <br>
@@ -33,6 +33,9 @@
                     <li>
                         <a href="<?php echo SITEURL; ?>foods.php">Foods</a>
                     </li>
+                    <li>
+                        <a href="feedback.php">Feedback</a>
+                    </li>
                     <li>            
 							<?php
 						if(empty($_SESSION["u_id"]))
@@ -46,6 +49,7 @@
 							}
 						?>
                     </li>
+
                 </ul>
             </div>
 

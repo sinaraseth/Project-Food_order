@@ -47,9 +47,9 @@
                                     <tr>
                                         <td><?php echo $sn++; ?>. </td>
                                         <td><?php echo $food; ?></td>
-                                        <td><?php echo $price; ?></td>
+                                        <td><?php echo $price; ?>$</td>
                                         <td><?php echo $qty; ?></td>
-                                        <td><?php echo $total; ?></td>
+                                        <td><?php echo $total; ?>$</td>
                                         <td><?php echo $order_date; ?></td>
 
                                         <td>

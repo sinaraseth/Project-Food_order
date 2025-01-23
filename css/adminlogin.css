@@ -46,7 +46,7 @@
   }
   div.container div.myform input[type="submit"]{
     color: white;
-    background-color: #45637d;
+    background-color: #dceb56;
     border: none;
     outline: none;
     border-radius: 2px;
@@ -60,3 +60,4 @@
   .text-center{
     text-align: center;
 }
+

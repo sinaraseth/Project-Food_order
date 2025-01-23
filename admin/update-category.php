@@ -6,14 +6,12 @@
 
         <br><br>
 
-
         <?php 
         
             //Check whether the id is set or not
             if(isset($_GET['id']))
             {
                 //Get the ID and all other details
-                //echo "Getting the Data";
                 $id = $_GET['id'];
                 //Create SQL Query to get all other details
                 $sql = "SELECT * FROM tbl_category WHERE id=$id";
@@ -32,6 +30,7 @@
                     $current_image = $row['image_name'];
                     $featured = $row['featured'];
                     $active = $row['active'];
+                    $description = $row['Description']; // Add this line to fetch description
                 }
                 else
                 {
@@ -43,7 +42,7 @@
             }
             else
             {
-                //redirect to Manage CAtegory
+                //redirect to Manage Category
                 header('location:'.SITEURL.'admin/manage-category.php');
             }
         
@@ -90,7 +89,6 @@
                     <td>Featured: </td>
                     <td>
                         <input <?php if($featured=="Yes"){echo "checked";} ?> type="radio" name="featured" value="Yes"> Yes 
-
                         <input <?php if($featured=="No"){echo "checked";} ?> type="radio" name="featured" value="No"> No 
                     </td>
                 </tr>
@@ -99,8 +97,14 @@
                     <td>Active: </td>
                     <td>
                         <input <?php if($active=="Yes"){echo "checked";} ?> type="radio" name="active" value="Yes"> Yes 
-
                         <input <?php if($active=="No"){echo "checked";} ?> type="radio" name="active" value="No"> No 
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Description: </td>
+                    <td>
+                        <textarea name="description" rows="5" cols="30"><?php echo $description; ?></textarea> <!-- Add textarea for description -->
                     </td>
                 </tr>
 
@@ -120,13 +124,13 @@
         
             if(isset($_POST['submit']))
             {
-                //echo "Clicked";
                 //1. Get all the values from our form
                 $id = $_POST['id'];
                 $title = $_POST['title'];
                 $current_image = $_POST['current_image'];
                 $featured = $_POST['featured'];
                 $active = $_POST['active'];
+                $description = $_POST['description']; // Add this line to get description value
 
                 //2. Updating New Image if selected
                 //Check whether the image is selected or not
@@ -140,32 +144,19 @@
                     {
                         //Image Available
 
-                        //A. UPload the New Image
-
-                        //Auto Rename our Image
-                        //Get the Extension of our image (jpg, png, gif, etc) e.g. "specialfood1.jpg"
+                        //A. Upload the New Image
                         $ext = end(explode('.', $image_name));
-
-                        //Rename the Image
-                        $image_name = "Food_Category_".rand(000, 999).'.'.$ext; // e.g. Food_Category_834.jpg
-                        
+                        $image_name = "Food_Category_".rand(000, 999).'.'.$ext;
 
                         $source_path = $_FILES['image']['tmp_name'];
-
                         $destination_path = "../images/category/".$image_name;
 
-                        //Finally Upload the Image
                         $upload = move_uploaded_file($source_path, $destination_path);
 
-                        //Check whether the image is uploaded or not
-                        //And if the image is not uploaded then we will stop the process and redirect with error message
                         if($upload==false)
                         {
-                            //SEt message
                             $_SESSION['upload'] = "<div class='error'>Failed to Upload Image. </div>";
-                            //Redirect to Add CAtegory Page
                             header('location:'.SITEURL.'admin/manage-category.php');
-                            //STop the Process
                             die();
                         }
 
@@ -173,21 +164,15 @@
                         if($current_image!="")
                         {
                             $remove_path = "../images/category/".$current_image;
-
                             $remove = unlink($remove_path);
 
-                            //CHeck whether the image is removed or not
-                            //If failed to remove then display message and stop the processs
                             if($remove==false)
                             {
-                                //Failed to remove image
                                 $_SESSION['failed-remove'] = "<div class='error'>Failed to remove current Image.</div>";
                                 header('location:'.SITEURL.'admin/manage-category.php');
-                                die();//Stop the Process
+                                die();
                             }
                         }
-                        
-
                     }
                     else
                     {
@@ -201,27 +186,24 @@
 
                 //3. Update the Database
                 $sql2 = "UPDATE tbl_category SET 
-                    title = '$title',
-                    image_name = '$image_name',
-                    featured = '$featured',
-                    active = '$active' 
-                    WHERE id=$id
-                ";
+                title = '$title',
+                image_name = '$image_name',
+                featured = '$featured',
+                active = '$active',
+                description = '" . mysqli_real_escape_string($conn, $description) . "' 
+                WHERE id=$id
+            ";
 
-                //Execute the Query
                 $res2 = mysqli_query($conn, $sql2);
 
-                //4. REdirect to Manage Category with MEssage
-                //CHeck whether executed or not
+                //4. Redirect to Manage Category with Message
                 if($res2==true)
                 {
-                    //Category Updated
                     $_SESSION['update'] = "<div class='success'>Category Updated Successfully.</div>";
                     header('location:'.SITEURL.'admin/manage-category.php');
                 }
                 else
                 {
-                    //failed to update category
                     $_SESSION['update'] = "<div class='error'>Failed to Update Category.</div>";
                     header('location:'.SITEURL.'admin/manage-category.php');
                 }

@@ -59,7 +59,7 @@
 
                 <table class="content-table">
                     <tr>
-                        <th>S.N.</th>
+                        <th>ID</th>
                         <th>Title</th>
                         <th>Image</th>
                         <th>Featured</th>
@@ -87,19 +87,28 @@
                         {
                             //We have data in database
                             //get the data and display
-                            while($row=mysqli_fetch_assoc($res))
-                            {
+                            while ($row = mysqli_fetch_assoc($res)) {
                                 $id = $row['id'];
                                 $title = $row['title'];
                                 $image_name = $row['image_name'];
                                 $featured = $row['featured'];
                                 $active = $row['active'];
+                              
+                                // Check if "description" key exists before accessing it
+                                if (isset($row['description'])) {
+                                  $description = $row['description'];
+                                } else {
+                                  // Set a default value or handle the missing description as needed
+                                  $description = ""; // Example: Set an empty string
+                                }
 
                                 ?>
 
                                     <tr>
                                         <td><?php echo $sn++; ?>. </td>
                                         <td><?php echo $title; ?></td>
+
+                                        <td><?php echo $description; ?></td>
 
                                         <td>
 

@@ -55,7 +55,7 @@
 
                 <table class="content-table">
                     <tr>
-                        <th>S.N.</th>
+                        <th>ID</th>
                         <th>Full Name</th>
                         <th>Username</th>
                         <th>Email</th>

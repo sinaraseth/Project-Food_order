@@ -10,6 +10,10 @@
     margin: 0 auto;
     padding: 1%;
 }
+.logo-img{
+    width: 250px;
+    height: auto;
+}
 .img-responsive{
     width: 100%;
 }
@@ -23,11 +27,17 @@
 .text-center{
     text-align: center;
 }
+.text-center{
+    text-align: center;
+}
 .text-left{
     text-align: left;
 }
-.text-white{
+.text-dark{
     color: white;
+}
+.text-darkblue{
+  color: #03073e;
 }
 
 .clearfix{
@@ -36,11 +46,11 @@
 }
 
 a{
-    color: #45637d;
+    color: #03073e;
     text-decoration: none;
 }
 a:hover{
-    color: #263746;
+    color: #dceb56;
 }
 
 .btn{
@@ -50,16 +60,16 @@ a:hover{
     border-radius: 5px;
 }
 .btn-primary{
-    background-color: #45637d;
+    background-color: #dceb56;
     color: white;
     cursor: pointer;
 }
 .btn-primary:hover{
     color: white;
-    background-color: #263746;
+    background-color: #dceb56;
 }
 h2{
-    color: #2f3542;
+    color: #020522a2;
     font-size: 2rem;
     margin-bottom: 2%;
 }
@@ -71,8 +81,8 @@ h3{
 }
 .float-text{
     position: absolute;
-    bottom: 50px;
-    left: 40%;
+    bottom: 20px;
+    left: 36%;
 }
 fieldset{
     border: 1px solid white;
@@ -113,13 +123,33 @@ fieldset{
 
 /* CSS for Food SEarch Section */
 
-.food-search{
-    background-image: url(../images/bg.jpg);
+.food-search {
+    background-image: url(../images/CADT-0-scaled.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     padding: 7% 0;
 }
+.food-search-category {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .container-video {
+    position: relative;
+    z-index: 1; /* Ensure content is on top of the video */
+    padding: 7% 0;
+  }
+
+  .food-search-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
 
 .food-search input[type="search"]{
     width: 50%;
@@ -129,16 +159,17 @@ fieldset{
     border-radius: 5px;
 }
 
-
 /* CSS for Categories */
 .categories{
     padding: 4% 0;
 }
 
 .box-3{
-    width: 28%;
+    width: 20%;
     float: left;
     margin: 2%;
+    max-width: 600px;
+   
 }
 
 
@@ -154,6 +185,7 @@ fieldset{
     float: left;
     background-color: white;
     border-radius: 15px;
+   
 }
 
 .food-menu-img{
@@ -303,7 +335,7 @@ fieldset{
 }
 /* Food order page css */
 .food-order{
-    background-image: url(../images/bg3.jpg);
+    background-image: url(../images/IMG_9488.JPG);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -316,4 +348,121 @@ fieldset{
     font-size: 1rem;
     border: none;
     border-radius: 5px;
+}
+
+/* Feedback Form Styles */
+
+.feedback-form {
+    background-color: #f9f9f9;
+    padding: 50px 0;
+}
+
+.feedback-form .container {
+    max-width: 800px;
+    margin: auto;
+    text-align: center;
+}
+
+.feedback-form h2 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.feedback-form form {
+    max-width: 600px;
+    margin: auto;
+}
+
+.feedback-form textarea {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    resize: none;
+    font-size: 16px;
+}
+
+.feedback-form textarea:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+.feedback-form .btn-primary {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.feedback-form .btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/* All Pages feedback Title */
+.all-page-title {
+    background-color: #343a40;
+    padding: 50px 0;
+    color: #fff;
+}
+
+.all-page-title h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+/* Contact Box */
+.contact-box {
+    padding: 50px 0;
+}
+
+.contact-box .heading-title {
+    margin-bottom: 30px;
+}
+
+/* Form Styles */
+.form-group {
+    margin-bottom: 20px;
+}
+
+textarea.form-control {
+    width: 100%; /* Make textarea full width */
+    height: 200px; /* Increase height */
+    resize: none;
+}
+
+.btn-common {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 15px 30px; /* Increase padding */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-common:hover {
+    background-color: #cbdf1a;
+}
+
+.mt-3{
+    padding-top: 20px;
+}
+
+/* Error Message Styles */
+.help-block.with-errors {
+    color: #dc3545;
+    margin-top: 5px;
+}
+
+/* Success Message Styles */
+h2 {
+    color: tomato;
+    text-align: center;
+    margin-bottom: 20px;
 }

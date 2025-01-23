@@ -16,7 +16,7 @@
 
                 <table class="content-table">
                     <tr>
-                        <th>S.N.</th>
+                        <th>ID</th>
                         <th>Food</th>
                         <th>Price</th>
                         <th>Qty.</th>

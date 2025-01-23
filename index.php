@@ -1,6 +1,8 @@
     <?php include('partials-front/menu.php'); ?>
 
     <!-- fOOD sEARCH Section Starts Here -->
+
+    
     <section class="food-search text-center">
         <div class="container">
             
@@ -24,11 +26,11 @@
     <!-- CAtegories Section Starts Here -->
     <section class="categories">
         <div class="container">
-            <h2 class="text-center">Explore Foods</h2>
+            <h2 class="text-center">Explore Foods At</h2>
 
             <?php 
                 //Create SQL Query to Display CAtegories from Database
-                $sql = "SELECT * FROM tbl_category WHERE active='Yes' AND featured='Yes' LIMIT 3";
+                $sql = "SELECT * FROM tbl_category WHERE active='Yes' AND featured='Yes' LIMIT 6";
                 //Execute the Query
                 $res = mysqli_query($conn, $sql);
                 //Count rows to check whether the category is available or not
@@ -58,13 +60,13 @@
                                     {
                                         //Image Available
                                         ?>
-                                        <img src="<?php echo SITEURL; ?>images/category/<?php echo $image_name; ?>" alt="Pizza" class="img-responsive img-curve">
+                                        <img src="<?php echo SITEURL; ?>images/category/<?php echo $image_name; ?>" alt="Image Available" class="img-responsive img-curve">
                                         <?php
                                     }
                                 ?>
                                 
 
-                                <h3 class="float-text text-white"><?php echo $title; ?></h3>
+                                <!-- <h3 class="float-text text-black"></h3> -->
                             </div>
                         </a>
 
@@ -139,7 +141,7 @@
 
                         <div class="food-menu-desc">
                             <h4><?php echo $title; ?></h4>
-                            <p class="food-price">₹<?php echo $price; ?></p>
+                            <p class="food-price">$<?php echo $price; ?></p>
                             <p class="food-detail">
                                 <?php echo $description; ?>
                             </p>

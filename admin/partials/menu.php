@@ -8,7 +8,7 @@
 
 <html>
     <head>
-        <title>Food Order Website - Home Page</title>
+        <title>CADT WR -Admin Page</title>
         <link rel="stylesheet" href="../css/admin.css">
         <link rel="stylesheet" href=
     "https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
@@ -29,6 +29,7 @@
                     <li><a href="manage-category.php">Category</a></li>
                     <li><a href="manage-food.php">Food</a></li>
                     <li><a href="manage-order.php">Order</a></li>
+                    <li><a href="view-feedback.php">Client Feedback</a></li>
                     <li><a href="logout.php">Logout</a></li>
                 </ul>
             </div>

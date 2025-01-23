@@ -35,7 +35,7 @@
                 <tr>
                     <td>Price: </td>
                     <td>
-                        <input type="number" name="price">
+                        <input type="float" name="price">
                     </td>
                 </tr>
 
@@ -168,7 +168,9 @@
                         // Image is SElected
                         //A. REnamge the Image
                         //Get the extension of selected image (jpg, png, gif, etc.) "vijay-thapa.jpg" vijay-thapa jpg
-                        $ext = end(explode('.', $image_name));
+                        $ext_array = explode('.', $image_name);
+                        $ext = end($ext_array);
+
 
                         // Create New Name for Image
                         $image_name = "Food-Name-".rand(0000,9999).".".$ext; //New Image Name May Be "Food-Name-657.jpg"

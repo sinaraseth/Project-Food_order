@@ -28,22 +28,22 @@
             ?>
             <br><br>
             <div class="container">
-            <div class="myform">
-            <!-- Login Form Starts HEre -->
-            <form action="" method="POST">
-            Username: <br>
-            <input type="text" name="username" placeholder="Enter Username"><br><br>
+                <div class="myform">
+                <!-- Login Form Starts HEre -->
+                <form action="" method="POST">
+                Username: <br>
+                <input type="text" name="username" placeholder="Enter Username"><br><br>
 
-            Password: <br>
-            <input type="password" name="password" placeholder="Enter Password"><br><br>
+                Password: <br>
+                <input type="password" name="password" placeholder="Enter Password"><br><br>
 
-            <input type="submit" name="submit" value="Login" class="btn-primary">
-            <br><br>
-            </form>
-            </div>
-            <div class="image">
-      <img src="../images/image.jpg">
-    </div>
+                <input type="submit" name="submit" value="Login" class="btn-primary">
+                <br><br>
+                </form>
+                </div>
+                <div class="image">
+                    <img src="../images/admin_panel.png">
+                </div>
             </div>
             <!-- Login Form Ends HEre -->
         </div>
